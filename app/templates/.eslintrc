@@ -1,0 +1,38 @@
+{
+  "target": ["./"],
+  "plugins": ["smells", "react"],
+  "globals": {
+    "$": true,
+    "window": true,
+    "document": true,
+    "NODE": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "ecmaFeatures": {
+      "blockBindings": true,
+      "forOf": true,
+      "jsx": true,
+      "modules": true,
+      "es6": true,
+      "arrowFunctions": true,
+      "generators": true,
+      "classes": true,
+      "templateStrings": true,
+      "destructuring": true,
+      "objectLiteralComputedProperties": true,
+      "objectLiteralShorthandMethods": true,
+      "defaultParams": true
+    }
+  },
+  "extends": ["airbnb/legacy", "airbnb/base"],
+  "rules": {
+    "react/jsx-uses-react": "error",
+    "react/jsx-uses-vars": "error",
+    "no-useless-constructor": 0,
+    "indent": 0,
+    "camelcase": 0,
+    "no-multi-spaces": 0,
+    "func-name": 0
+  }
+}
