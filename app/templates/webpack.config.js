@@ -26,10 +26,14 @@ const commonConfig = (env) => ({
   }
 });
 
+/* eslint consistent-return: 0 */
 module.exports = ({ target }) => {
-  switch(target) {
+  if (typeof target === 'undefined') {
+    target = 'development'; /* eslint no-param-reassign: 0 */
+  }
+
+  switch (target) {
     case 'development':
-      console.log(commonConfig(target))
       return merge([
         commonConfig(target),
         parts.loadStylesheet(target),
