@@ -49,6 +49,7 @@
     "camelcase": 0,
     "no-multi-spaces": 0,
     "func-name": 0,
-    "import/no-named-as-default": 0
+    "import/no-named-as-default": 0,
+    "class-methods-use-this": 0
   }
 }
