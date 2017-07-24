@@ -2,11 +2,15 @@ const webpack                     = require('webpack');
 const path                        = require('path');
 const merge                       = require('webpack-merge');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
+const WebpackChunkHash            = require('webpack-chunk-hash');
+const ChunkManifestPlugin         = require('chunk-manifest-webpack-plugin');
 const parts                       = require('./webpack.parts');
+
 
 /* you can seperate entry to another file. */
 const entry = {
-  app: './client/index.js'
+  app: './client/index.js',
+  vender: ['react', 'react-dom']
 };
 
 const commonConfig = (env) => ({
@@ -22,7 +26,7 @@ const commonConfig = (env) => ({
   entry: entry,
   output: {
     path: path.join(__dirname, 'bundle'),
-    filename: '[name].bundle.js',
+    filename: env.target === 'development' ? '[name].bundle.js' : '[name].[chunkhash].js',
     publicPath: '/bundle/'
   }
 });
@@ -54,7 +58,18 @@ module.exports = ({ target }) => {
         { 
           plugins: [
             new webpack.optimize.UglifyJsPlugin(),
+            new webpack.optimize.CommonsChunkPlugin({
+              name: 'vender'
+            }),
             new webpack.NoEmitOnErrorsPlugin(),
+            new webpack.HashedModuleIdsPlugin(),
+
+            new WebpackChunkHash(),
+            new ChunkManifestPlugin({
+              filename: 'chunk-manifest.json',
+              manifestVariable: 'webpackManifest',
+              inlineManifest: true
+            })
           ]
         },
         parts.loadJavascript(target),

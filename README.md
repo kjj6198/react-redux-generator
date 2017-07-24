@@ -37,6 +37,15 @@
   - redux-logger
 - ramda
 
+## CHANGELOG
+
+### 7/24
+
+- improve webpack performance
+  - add WebpackChunkHash, HashedModuleIdsPlugin, ChunkManifestPlugin to allow better cache
+  - add dynamic import
+  - CommonChink for vender caching
+
 
 ## License
 
