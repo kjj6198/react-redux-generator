@@ -4,6 +4,7 @@ const merge                       = require('webpack-merge');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const parts                       = require('./webpack.parts');
 
+/* you can seperate entry to another file. */
 const entry = {
   app: './client/index.js'
 };
