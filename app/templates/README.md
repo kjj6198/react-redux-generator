@@ -2,8 +2,14 @@
 
 方便建立 redux application。
 
-- eslint 搭配 airbnb config
-- stylelint 搭配 standard config
+- eslint 搭配 airbnb config，並修正一些較嚴格的設定，可以到 `.eslintrc` 修改
+- stylelint 搭配 standard config，並修正一些較嚴格的設定，可以到 `.stylelintrc` 修改
+
+### Future TODOs
+
+[] 更新 react 版本至 16
+[] 搭配比較客製化的 yeoman 設定
+[] 使用 react-hot-loader 代替 react-hmr
 
 ### Webpack setting
 
