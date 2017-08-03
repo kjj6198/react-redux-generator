@@ -36,9 +36,14 @@
   - redux
   - redux-logger
 - ramda
+- husky
+  - run script before commit or push
 
 ## CHANGELOG
 
+### 8/3
+  - 更新 package.json
+  
 ### 7/24
 
 - improve webpack performance

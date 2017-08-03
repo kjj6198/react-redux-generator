@@ -9,8 +9,7 @@ const parts                       = require('./webpack.parts');
 
 /* you can seperate entry to another file. */
 const entry = {
-  app: './client/index.js',
-  vender: ['react', 'react-dom']
+  app: './client/index.js'
 };
 
 const commonConfig = (env) => ({
