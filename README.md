@@ -7,9 +7,9 @@
 
 ### Future TODOs
 
-[] 更新 react 版本至 16
-[] 搭配比較客製化的 yeoman 設定
-[] 使用 react-hot-loader 代替 react-hmr
+- [ ] 更新 react 版本至 16
+- [ ] 搭配比較客製化的 yeoman 設定
+- [ ] 使用 react-hot-loader 代替 react-hmr
 
 ### Webpack setting
 
