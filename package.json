@@ -1,6 +1,6 @@
 {
   "name": "generator-react-redux",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "setup react redux application with stylelint, eslint, postcss.",
   "main": "index.js",
   "scripts": {
@@ -12,7 +12,11 @@
     "redux"
   ],
   "author": "Kalan <kjj6198@gmail.com>",
-  "license": "ISC",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kjj6198/react-redux-generator"
+  },
   "dependencies": {
     "yeoman-generator": "^1.1.1"
   }
