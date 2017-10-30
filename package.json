@@ -1,13 +1,15 @@
 {
-  "name": "react-redux-generator",
-  "version": "1.0.0",
+  "name": "generator-react-redux",
+  "version": "1.1.0",
   "description": "方便建立 redux application。",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+
   },
   "keywords": [
-    "yeoman-generator"
+    "yeoman-generator",
+    "react",
+    "redux"
   ],
   "author": "Kalan <kjj6198@gmail.com>",
   "license": "ISC",
