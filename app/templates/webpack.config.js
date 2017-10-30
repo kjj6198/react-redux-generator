@@ -17,12 +17,9 @@ const commonConfig = (env) => ({
   devtool: env.target === 'development' ? 'cheap-module-eval-source-map' : 'cheap-source-map',
   resolve: {
     modules: ['node_modules', './client'],
-    extensions: ['.js'],
-    alias: {
-
-    },
+    extensions: ['.js']
   },
-  entry: entry,
+  entry,
   output: {
     path: path.join(__dirname, 'bundle'),
     filename: env.target === 'development' ? '[name].bundle.js' : '[name].[chunkhash].js',
@@ -30,8 +27,9 @@ const commonConfig = (env) => ({
   }
 });
 
+
 /* eslint consistent-return: 0 */
-module.exports = ({ target }) => {
+function config(target = 'development') {
   if (typeof target === 'undefined') {
     target = 'development'; /* eslint no-param-reassign: 0 */
   }
@@ -44,7 +42,7 @@ module.exports = ({ target }) => {
         parts.devServer(target),
         parts.loadJavascript(target),
         parts.setVariable('process.env.NODE_ENV', 'development'),
-        { 
+        {
           plugins: [
             new webpack.NamedModulesPlugin(),
             new webpack.LoaderOptionsPlugin({ debug: true })
@@ -75,5 +73,9 @@ module.exports = ({ target }) => {
         parts.setVariable('process.env.NODE_ENV', 'production'),
         parts.extractStylesheet(target)
       ]);
+    default:
+      return {};
   }
 }
+
+module.exports = config('development');
