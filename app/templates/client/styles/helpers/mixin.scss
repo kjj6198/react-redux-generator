@@ -1,0 +1,59 @@
+@mixin prefix($prefix, $className) {
+  .#{$prefix}-#{$className} {
+    @content;
+  }
+}
+
+@mixin block($block_name) {
+  @at-root .#{$block_name} {
+    @content;
+  }
+}
+
+@mixin element($element_name, $is_prefix:true) {
+  @if ($is_prefix) {
+    &__#{$element_name} {
+      @content;
+    }
+  }
+
+  @else {
+    @at-root & .#{$element_name} {
+      @content;
+    }
+  }
+}
+
+@mixin modifier($modifier_name) {
+  &-#{$modifier_name} {
+    @content;
+  }
+}
+
+@mixin font-size($size) {
+  @if map-has-key($font, $key) {
+    font-size: map-get($font, $key);
+  }
+
+  @else {
+    @error "unknown font key, check your font setting for more information.";
+  }
+}
+
+/**
+ * will produce status class.
+ * e.g
+ @include is(active) {
+    background-color: red;
+ }
+ .-is-active {
+   background-color: red;
+ }
+ *
+ */
+@mixin is($state) {
+  &.is-#{$state} {
+    @content;
+  }
+}
+

@@ -1,0 +1,60 @@
+$base-font-size: 16px;
+$lineheight-base: 1.65;
+$heading-margin-bottom: 1rem / 2;
+
+$font-family: (
+  serif: (Georgia, Cambria, "Times New Roman", Times, serif, "SongTi TC"),
+  sans: ("-apple-system", BlinkMacSystemFont, "PingFang TC", "Roboto", sans-serif),
+  number: ('Oswald', sans-serif)
+);
+
+$font: (
+  'x-large': 3rem,
+  large: 2rem,
+  medium: 1.3rem,
+  normal: 1rem,
+  small: .8rem,
+  'x-small': .5rem,
+);
+
+$font-sizes: (
+  desktop: (
+    'x-large': 30px,
+    large: 24px,
+    medium: 20px,
+    normal: 16px,
+    small: 12px,
+    'x-small': 11px,
+  ),
+  mobile: (
+    'x-large': 20px,
+    large: 18px,
+    medium: 15px,
+    normal: 14px,
+    small: 13px,
+    'x-small': 12px,
+  )
+);
+
+@function f($key, $device: 'mobile') {
+  $font-size-map: map-get($font-sizes, $device);
+
+  @if map-has-key($font-size-map, $key) {
+    @return map-get($font-size-map, $key);
+  } @else {
+    @error "unknown key #{$key} in $font-size. please checkout `font.scss` for more information";
+  }
+}
+
+@mixin responsive-font-size($key) {
+  @if variable-exist(desktop) {
+    font-size: f($key, 'mobile');
+
+    // this variable came from `_grid.scss`
+    @include for-size(tablet-up) {
+      font-size: f($key, 'desktop');
+    }
+  } @else {
+    @error "請提供 $desktop 變數以供 susy-breakpoint 使用";
+  }
+}

@@ -11,10 +11,7 @@
   },
   "rules": {
     "react/jsx-filename-extension": 0,
-    "comma-dangle": ["error", { "functions": "ignore" }],
     "default-case": 0,
-    "no-multi-spaces": 0,
-    "arrow-parens": 0,
-    "space-before-function-paren": 0
+    "no-multi-spaces": 0
   }
 }

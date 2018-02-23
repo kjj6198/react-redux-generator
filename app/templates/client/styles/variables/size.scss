@@ -1,0 +1,13 @@
+$basic-container-width: 1080px;
+$header-height: 55px;
+$sidebar-width: 200px;
+
+$spacer: 1rem !default;
+$spacers: (
+  0: 0,
+  1: ($spacer * .25),
+  2: ($spacer * .5),
+  3: $spacer,
+  4: ($spacer * 1.5),
+  5: ($spacer * 3)
+) !default;

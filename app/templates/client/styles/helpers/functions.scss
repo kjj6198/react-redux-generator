@@ -1,0 +1,55 @@
+@function getColor($key) {
+  @if map-has-key($colors, $key) {
+    @return map-get($colors, $key);
+  }
+
+  @else {
+    @error "unknown key #{$key}, please check variables map.";
+  }
+}
+
+/* alias for `getColor` */
+@function c($key) {
+  @return getColor($key);
+}
+
+@function getFont($key) {
+  @if map-has-key($font, $key) {
+    @return map-get($font, $key);
+  }
+
+  @else {
+    @error "unknown key #{$key}, please check variables map.";
+  }
+}
+
+/* alias for getFont */
+@function f($key) {
+  @return getFont($key);
+}
+
+/**
+ * Convert font-size from px to rem with px fallback
+ *
+ * @param $size - the value in pixel you want to convert
+ *
+ * e.g. p {@include fontSize(12px);}
+ *
+ */
+
+// Function for converting a px based font-size to rem.
+@function calculateRem($size) {
+  $remSize: $size / $base-font-size;
+
+  @return #{$remSize}rem;
+}
+
+@function spacing($num) {
+  @if (type-of($num) == 'number' && unit($num) == '') {
+    @return $spacer * $num;
+  }
+
+  @else {
+    @error "TypeError: num should be pure number, but got #{type-of($num)}.";
+  }
+}

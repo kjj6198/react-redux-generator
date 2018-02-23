@@ -1,0 +1,50 @@
+
+/*
+ * with css variable, we can import our ssass variable to :root,
+ * and style-component can access with var(varName)
+ * now, we just simply inject color variable and breakpoint into css variable
+ */
+ @import url('https://fonts.googleapis.com/css?family=Oswald:400,600');
+
+ :root {
+   @each $color, $val in $colors {
+     --#{$color}: #{$val};
+   }
+ 
+   @each $zindex in $layer {
+     --zIndex-#{$zindex}: index($layer, $zindex);
+   }
+ 
+   --font-family-sans: #{inspect(map-get($font-family, 'sans'))};
+   --font-family-serif: #{inspect(map-get($font-family, 'serif'))};
+ }
+ 
+ img {
+   position: relative;
+   font-family: "PingFang TC";
+   font-weight: 300;
+   font-size: 14px;
+   line-height: 2;
+   text-align: center;
+ 
+   &::before {
+     display: block;
+     margin-bottom: 10px;
+     content: "抱歉，這張圖片目前已移除或無法使用";
+   }
+   
+   &::after {
+     position: absolute;
+     z-index: 20;
+     top: 5px;
+     left: 0;
+     width: 100%;
+     text-align: center;
+     top: 50%;
+     display: block;
+     padding: 10px 5px;
+     background-color: #bbb;
+     border: 2px dotted #444;
+     content: "url" "(" attr(src) ")";
+   }
+ }
