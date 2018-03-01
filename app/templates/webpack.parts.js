@@ -44,7 +44,18 @@ module.exports = {
           test: /\.(sass|scss)$/,
           use: [
             'style-loader?sourceMap=true',
-            'css-loader?sourceMap=true',
+            {
+              loader: 'css-loader',
+              options: {
+                sourceMap: true,
+                modules: true,
+                importLoader: 2,
+                localIdentName: process.env.NODE_ENV === 'production'
+                  ? '[hash:base64:5]'
+                  : '[name]-[local]_[hash:base64:5]',
+
+              }
+            },
             'postcss-loader?sourceMap=true',
             'sass-loader?sourceMap=true',
             {
@@ -67,7 +78,18 @@ module.exports = {
           use: ExtractTextPlugin.extract({
             fallback: 'style-loader',
             use: [
-              'css-loader',
+              {
+                loader: 'css-loader',
+                options: {
+                  sourceMap: true,
+                  modules: true,
+                  importLoader: 2,
+                  localIdentName: process.env.NODE_ENV === 'production'
+                    ? '[hash:base64:5]'
+                    : '[name]-[local]_[hash:base64:5]',
+  
+                }
+              },
               'postcss-loader',
               'sass-loader',
               {
