@@ -1,7 +1,38 @@
 {
   "scripts": {
-    "webpack-dev-server": "nodemon --watch webpack.config.js --watch webpack.parts.js --exec \"webpack-dev-server --env.target development\"",
-    "lint": "eslint ./"
+    "start": "nodemon --watch webpack.config.js --watch webpack.parts.js --exec \"webpack-dev-server --env.target development\"",
+    "lint": "eslint ./client",
+    "test": "jest ./client --coverage",
+    "test:clean": "rimraf ./coverage",
+    "pretest": "npm run test:clean"
+  },
+  "jest": {
+    "coveragePathIgnorePatterns": [
+      "share\\/helpers\\/.*\\.js$",
+      "\\/stories\\.js$",
+      "\\/messages\\.js$",
+      "\\/message\\.js$"
+    ],
+    "collectCoverageFrom": [
+      "client/**/*.{js,jsx}",
+      "!client/**/*.test.{js,jsx}",
+      "!client/pages/**/*.{js,jsx}",
+      "!client/**/stories.js",
+      "!client/**/*.messages.js",
+      "!client/index.js",
+      "!client/payment.js",
+      "!client/pages/route.js"
+    ],
+    "transform": {
+      "^.+\\.jsx?$": "babel-jest"
+    },
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
+    ],
+    "moduleNameMapper": {
+      ".*\\.(jpg|png|svg)$": "<rootDir>/test/mockImage.js",
+      "\\.(css|scss)$": "identity-obj-proxy"
+    }
   },
   "dependencies": {
     "prop-types": "^15.5.10",
@@ -34,7 +65,10 @@
     "eslint-plugin-jsx-a11y": "~6.0.2",
     "eslint-plugin-react": "~7.4.0",
     "eslint-plugin-smells": "~1.0.1",
+    "enzyme": "^2.9.1",
+    "enzyme-to-json": "^1.5.1",
     "extract-text-webpack-plugin": "^2.1.2",
+    "identity-obj-proxy": "^3.0.0",
     "file-loader": "^0.11.2",
     "friendly-errors-webpack-plugin": "^1.6.1",
     "husky": "^0.14.3",
