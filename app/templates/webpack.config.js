@@ -9,22 +9,22 @@ const parts                       = require('./webpack.parts');
 
 /* you can seperate entry to another file. */
 const entry = {
-  app: './client/index.js'
+  app: './client/index.js',
 };
 
-const commonConfig = (env) => ({
+const commonConfig = env => ({
   context: __dirname,
   devtool: env.target === 'development' ? 'cheap-module-eval-source-map' : 'cheap-source-map',
   resolve: {
     modules: ['node_modules', './client'],
-    extensions: ['.js']
+    extensions: ['.js'],
   },
   entry,
   output: {
     path: path.join(__dirname, 'bundle'),
     filename: env.target === 'development' ? '[name].bundle.js' : '[name].[chunkhash].js',
-    publicPath: '/bundle/'
-  }
+    publicPath: '/bundle/',
+  },
 });
 
 
@@ -45,18 +45,18 @@ function config(target = 'development') {
         {
           plugins: [
             new webpack.NamedModulesPlugin(),
-            new webpack.LoaderOptionsPlugin({ debug: true })
-          ]
-        }
+            new webpack.LoaderOptionsPlugin({ debug: true }),
+          ],
+        },
       ]);
     case 'production':
       return merge([
         commonConfig(target),
-        { 
+        {
           plugins: [
             new webpack.optimize.UglifyJsPlugin(),
             new webpack.optimize.CommonsChunkPlugin({
-              name: 'vender'
+              name: 'vender',
             }),
             new webpack.NoEmitOnErrorsPlugin(),
             new webpack.HashedModuleIdsPlugin(),
@@ -65,13 +65,13 @@ function config(target = 'development') {
             new ChunkManifestPlugin({
               filename: 'chunk-manifest.json',
               manifestVariable: 'webpackManifest',
-              inlineManifest: true
-            })
-          ]
+              inlineManifest: true,
+            }),
+          ],
         },
         parts.loadJavascript(target),
         parts.setVariable('process.env.NODE_ENV', 'production'),
-        parts.extractStylesheet(target)
+        parts.extractStylesheet(target),
       ]);
     default:
       return {};

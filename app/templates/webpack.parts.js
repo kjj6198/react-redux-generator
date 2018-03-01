@@ -1,5 +1,5 @@
 const fs      = require('fs');
-const path    = require('path')
+const path    = require('path');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
@@ -9,35 +9,35 @@ module.exports = {
     const env = {};
     env[key] = JSON.stringify(value);
 
-    plugins: [new webpack.DefinePlugin(env)]
+    [new webpack.DefinePlugin(env)];
   },
-  loadJavascript: (env) => ({
+  loadJavascript: env => ({
     module: {
       rules: [
         {
           test: /\.js$/,
           loader: 'babel-loader?cacheDirectory',
           include: path.join(__dirname, 'client'),
-          exclude: /node_modules/
+          exclude: /node_modules/,
         },
-      ]
-    }
+      ],
+    },
   }),
-  devServer: (env) => ({
+  devServer: env => ({
     output: {
       publicPath: 'http://localhost:8080' + '/bundle',
-      filename: 'dev.js'
+      filename: 'dev.js',
     },
     devServer: {
       historyApiFallback: true,
       hot: true,
       stats: 'errors-only',
       port: 8080,
-      host: '127.0.0.1'
+      host: '127.0.0.1',
     },
-    plugins: [new webpack.HotModuleReplacementPlugin({ mutiStep: true })]
+    plugins: [new webpack.HotModuleReplacementPlugin({ mutiStep: true })],
   }),
-  loadStylesheet: (options) => ({
+  loadStylesheet: options => ({
     module: {
       rules: [
         {
@@ -46,13 +46,20 @@ module.exports = {
             'style-loader?sourceMap=true',
             'css-loader?sourceMap=true',
             'postcss-loader?sourceMap=true',
-            'sass-loader?sourceMap=true'
-          ]
-        }
-      ]
-    }
+            'sass-loader?sourceMap=true',
+            {
+              loader: 'sass-resources-loader',
+              options: {
+                resources: './client/styles/resources.scss',
+              },
+            },
+
+          ],
+        },
+      ],
+    },
   }),
-  extractStylesheet: (env) => ({
+  extractStylesheet: env => ({
     module: {
       rules: [
         {
@@ -62,25 +69,31 @@ module.exports = {
             use: [
               'css-loader',
               'postcss-loader',
-              'sass-loader'
-            ]
-          })
+              'sass-loader',
+              {
+                loader: 'sass-resources-loader',
+                options: {
+                  resources: './client/styles/resources.scss',
+                },
+              },
+            ],
+          }),
         },
         {
           test: /\.css$/,
           loader: ExtractTextPlugin.extract({
             fallback: 'style-loader',
-            use: 'css-loader'
-          })
-        }
+            use: 'css-loader',
+          }),
+        },
       ],
     },
     plugins: [
       new ExtractTextPlugin({
-        filename: "bundle/bundle.scss",
-        allChunks: true
-      })
-        
-    ]
-  })
-}
+        filename: 'bundle/bundle.scss',
+        allChunks: true,
+      }),
+
+    ],
+  }),
+};
