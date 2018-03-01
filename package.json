@@ -1,6 +1,6 @@
 {
   "name": "generator-react-redux-quickstart",
-  "version": "1.2.4",
+  "version": "1.2.0",
   "description": "setup react redux application with stylelint, eslint, postcss.",
   "main": "index.js",
   "scripts": {
